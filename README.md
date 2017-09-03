@@ -65,6 +65,24 @@ await client.ConnectAsync();
 
 #### 
 
+### UI Status
+
+Get the current UI status (room temperature and more)
+
+```
+INefitEasyClient client = NefitEasyClient.Create("serial", "accesskey", "password");
+    
+await client.ConnectAsync();
+    
+if (client.ConnectionStatus == NefitConnectionStatus.Connected)
+{
+     UiStatus status = await client.UiStatusAsync();
+     double temperature = status.InHouseTemperature;
+}
+```
+
+#### 
+
 ### Set Room Temperature
 
 Set a room temperature between 5 and 30 degrees Celsius
