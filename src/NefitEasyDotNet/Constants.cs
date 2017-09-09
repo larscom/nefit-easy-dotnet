@@ -8,7 +8,6 @@ namespace NefitEasyDotNet
 {
     public static class EndpointPaths
     {
-        //Ecus 
         public const string USER_PROGRAM_ACTIVE_PROGRAM_ENDPOINT_PATH = "/ecus/rrc/userprogram/activeprogram";
         public const string USER_PROGRAM_PROGRAM_ENDPOINT_PATH = "/ecus/rrc/userprogram/program";
         public const string USER_PROGRAM_USER_SWITCHPOINT_NAME_ENDPOINT_PATH = "/ecus/rrc/userprogram/userswitchpointname";
@@ -24,8 +23,7 @@ namespace NefitEasyDotNet
         public const string INSTALLER_DETAILS_ENDPOINT_PATH = "/ecus/rrc/installerdetails";
         public const string PIR_SENSITIVITY_ENDPOINT_PATH = "/ecus/rrc/pirSensitivity";
         public const string TEMPERATURE_STEP_ENDPOINT_PATH = "/ecus/rrc/temperaturestep";
-
-        //DhwCircuits
+      
         public const string DHWA_THERMAL_DESINFECT_STATE_ENDPOINT_PATH = "/dhwCircuits/dhwA/thermaldesinfect/state";
         public const string DHWA_THERMAL_DESINFECT_TIME_ENDPOINT_PATH = "/dhwCircuits/dhwA/thermaldesinfect/time";
         public const string DHWA_THERMAL_DESINFECT_WEEKDAY_ENDPOINT_PATH = "/dhwCircuits/dhwA/thermaldesinfect/weekday";
@@ -33,8 +31,7 @@ namespace NefitEasyDotNet
         public const string DHWA_NEXT_SWITCHPOINT_ENDPOINT_PATH = "/dhwCircuits/dhwA/dhwNextSwitchpoint";
         public const string DHWA_OPERATION_CLOCK_MODE_ENDPOINT_PATH = "/dhwCircuits/dhwA/dhwOperationClockMode";
         public const string DHWA_OPERATION_MANUAL_MODE_ENDPOINT_PATH = "/dhwCircuits/dhwA/dhwOperationManualMode";
-
-        //System 
+       
         public const string SENSORS_TEMPERATURES_OUTDOOR_ENDPOINT_PATH = "/system/sensors/temperatures/outdoor_t1";
         public const string APPLIANCE_SYSTEM_PRESSURE_ENDPOINT_PATH = "/system/appliance/systemPressure";
         public const string APPLIANCE_DISPLAY_CODE_ENDPOINT_PATH = "/system/appliance/displaycode";
@@ -44,16 +41,14 @@ namespace NefitEasyDotNet
         public const string APPLIANCE_SERIAL_NUMBER_ENDPOINT_PATH = "/system/appliance/serialnumber";
         public const string APPLIANCE_VERSION_ENDPOINT_PATH = "/system/appliance/version";
         public const string EMS_BRANDBIT_ENDPOINT_PATH = "/system/interfaces/ems/brandbit";
-
-        //Gateway
+      
         public const string REMOTE_SERVICESTATE_ENDPOINT_PATH = "/gateway/remote/servicestate";
         public const string SERIAL_NUMBER_ENDPOINT_PATH = "/gateway/serialnumber";
         public const string VERSION_FIRMWARE_ENDPOINT_PATH = "/gateway/versionFirmware";
         public const string VERSION_HARDWARE_ENDPOINT_PATH = "/gateway/versionHardware";
         public const string UUID_ENDPOINT_PATH = "/gateway/uuid";
         public const string UPDATE_STRATEGY_ENDPOINT_PATH = "/gateway/update/strategy";
-
-        //HeatingCircuits 
+       
         public const string HC1_ACTUAL_SUPPLY_TEMPERATURE_ENDPOINT_PATH = "/heatingCircuits/hc1/actualSupplyTemperature";
         public const string HC1_TEMPERATURE_ADJUSTMENT_ENDPOINT_PATH = "/heatingCircuits/hc1/temperatureAdjustment";
         public const string HC1_USERMODE_ENDPOINT_PATH = "/heatingCircuits/hc1/usermode";

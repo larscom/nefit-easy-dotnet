@@ -241,7 +241,7 @@ namespace NefitEasyDotNet
 
         public async Task ConnectAsync() => await Task.Run(() => Connect());
 
-        void Connect()
+        public void Connect()
         {
             if (_client != null) Disconnect();
 
@@ -290,7 +290,7 @@ namespace NefitEasyDotNet
 
         public async Task DisconnectAsync() => await Task.Run(() => Disconnect());
 
-        void Disconnect()
+        public void Disconnect()
         {
             try
             {
@@ -324,13 +324,13 @@ namespace NefitEasyDotNet
             if (status == NefitConnectionStatus.InvalidPassword || status == NefitConnectionStatus.InvalidSerialAccessKey) Disconnect();
         }
 
-        public async Task<int> ActiveProgramAsync() => await Task.Run(() => GetActiveProgram());
+        public async Task<int> GetActiveProgramAsync() => await Task.Run(() => GetActiveProgram());
 
-        int GetActiveProgram() => HttpGet<int>(EndpointPaths.USER_PROGRAM_ACTIVE_PROGRAM_ENDPOINT_PATH);
+        public int GetActiveProgram() => HttpGet<int>(EndpointPaths.USER_PROGRAM_ACTIVE_PROGRAM_ENDPOINT_PATH);
 
-        public async Task<IEnumerable<ProgramSwitch>> ProgramAsync(int programNumber) => await Task.Run(() => GetProgram(programNumber));
+        public async Task<IEnumerable<ProgramSwitch>> GetProgramAsync(int programNumber) => await Task.Run(() => GetProgram(programNumber));
 
-        IEnumerable<ProgramSwitch> GetProgram(int programNumber)
+        public IEnumerable<ProgramSwitch> GetProgram(int programNumber)
         {
             if (programNumber < 0 || programNumber >= 3) return null;
 
@@ -339,9 +339,9 @@ namespace NefitEasyDotNet
             return !program0.Any() ? null : NefitEasyUtils.ParseProgram(program0);
         }
 
-        public async Task<string> SwitchpointNameAsync(int nameIndex) => await Task.Run(() => GetSwitchpointName(nameIndex));
+        public async Task<string> GetSwitchpointNameAsync(int nameIndex) => await Task.Run(() => GetSwitchpointName(nameIndex));
 
-        string GetSwitchpointName(int nameIndex)
+        public string GetSwitchpointName(int nameIndex)
         {
             if (--nameIndex >= 1 && nameIndex <= 2)
                 return HttpGet<string>($"{EndpointPaths.USER_PROGRAM_USER_SWITCHPOINT_NAME_ENDPOINT_PATH}{nameIndex}");
@@ -349,90 +349,90 @@ namespace NefitEasyDotNet
             return null;
         }
 
-        public async Task<bool?> FireplaceFunctionActiveAsync() => await Task.Run(() => GetFireplaceFunctionActive());
+        public async Task<bool?> FireplaceFunctionActiveAsync() => await Task.Run(() => FireplaceFunctionActive());
 
-        bool? GetFireplaceFunctionActive() => NefitEasyUtils.IsOnOrTrue(HttpGet<string>(EndpointPaths.USER_PROGRAM_PREHEATING_ENDPOINT_PATH));
+        public bool? FireplaceFunctionActive() => NefitEasyUtils.IsOnOrTrue(HttpGet<string>(EndpointPaths.USER_PROGRAM_PREHEATING_ENDPOINT_PATH));
 
-        public async Task<bool?> PreheatingActiveAsync() => await Task.Run(() => GetPreheatingActive());
+        public async Task<bool?> PreheatingActiveAsync() => await Task.Run(() => PreheatingActive());
 
-        bool? GetPreheatingActive() => NefitEasyUtils.IsOnOrTrue(HttpGet<string>(EndpointPaths.USER_PROGRAM_PREHEATING_ENDPOINT_PATH));
+        public bool? PreheatingActive() => NefitEasyUtils.IsOnOrTrue(HttpGet<string>(EndpointPaths.USER_PROGRAM_PREHEATING_ENDPOINT_PATH));
 
-        public async Task<double> OutdoorTemperatureAsync() => await Task.Run(() => GetOutdoorTemperature());
+        public async Task<double> GetOutdoorTemperatureAsync() => await Task.Run(() => GetOutdoorTemperature());
 
-        double GetOutdoorTemperature() => HttpGet<double>(EndpointPaths.SENSORS_TEMPERATURES_OUTDOOR_ENDPOINT_PATH);
+        public double GetOutdoorTemperature() => HttpGet<double>(EndpointPaths.SENSORS_TEMPERATURES_OUTDOOR_ENDPOINT_PATH);
 
-        public async Task<string> EasyServiceStatusAsync() => await Task.Run(() => GetEasyServiceStatus());
+        public async Task<string> GetEasyServiceStatusAsync() => await Task.Run(() => GetEasyServiceStatus());
 
-        string GetEasyServiceStatus() => HttpGet<string>(EndpointPaths.REMOTE_SERVICESTATE_ENDPOINT_PATH);
+        public string GetEasyServiceStatus() => HttpGet<string>(EndpointPaths.REMOTE_SERVICESTATE_ENDPOINT_PATH);
 
-        public async Task<bool?> IgnitionStatusAsync() => await Task.Run(() => GetIgnitionStatus());
+        public async Task<bool?> IgnitionStatusAsync() => await Task.Run(() => IgnitionStatus());
 
-        bool? GetIgnitionStatus() => NefitEasyUtils.IsOnOrTrue(HttpGet<string>(EndpointPaths.PM_IGNITION_STATUS_ENDPOINT_PATH));
+        public bool? IgnitionStatus() => NefitEasyUtils.IsOnOrTrue(HttpGet<string>(EndpointPaths.PM_IGNITION_STATUS_ENDPOINT_PATH));
 
-        public async Task<bool?> RefillNeededStatusAsync() => await Task.Run(() => GetRefillNeededStatus());
+        public async Task<bool?> RefillNeededStatusAsync() => await Task.Run(() => RefillNeededStatus());
 
-        bool? GetRefillNeededStatus() => NefitEasyUtils.IsOnOrTrue(HttpGet<string>(EndpointPaths.PM_REFILL_NEEDED_STATUS_ENDPOINT_PATH));
+        public bool? RefillNeededStatus() => NefitEasyUtils.IsOnOrTrue(HttpGet<string>(EndpointPaths.PM_REFILL_NEEDED_STATUS_ENDPOINT_PATH));
 
-        public async Task<bool?> ClosingValveStatusAsync() => await Task.Run(() => GetClosingValveStatus());
+        public async Task<bool?> ClosingValveStatusAsync() => await Task.Run(() => ClosingValveStatus());
 
-        bool? GetClosingValveStatus() => NefitEasyUtils.IsOnOrTrue(HttpGet<string>(EndpointPaths.PM_CLOSING_VALVE_STATUS_ENDPOINT_PATH));
+        public bool? ClosingValveStatus() => NefitEasyUtils.IsOnOrTrue(HttpGet<string>(EndpointPaths.PM_CLOSING_VALVE_STATUS_ENDPOINT_PATH));
 
-        public async Task<bool?> ShortTappingStatusAsync() => await Task.Run(() => GetShortTappingStatus());
+        public async Task<bool?> ShortTappingStatusAsync() => await Task.Run(() => ShortTappingStatus());
 
-        bool? GetShortTappingStatus() => NefitEasyUtils.IsOnOrTrue(HttpGet<string>(EndpointPaths.PM_SHORT_TAPPING_STATUS_ENDPOINT_PATH));
+        public bool? ShortTappingStatus() => NefitEasyUtils.IsOnOrTrue(HttpGet<string>(EndpointPaths.PM_SHORT_TAPPING_STATUS_ENDPOINT_PATH));
 
-        public async Task<bool?> SystemLeakingStatusAsync() => await Task.Run(() => GetSystemLeakingStatus());
+        public async Task<bool?> SystemLeakingStatusAsync() => await Task.Run(() => SystemLeakingStatus());
 
-        bool? GetSystemLeakingStatus() => NefitEasyUtils.IsOnOrTrue(HttpGet<string>(EndpointPaths.PM_SYSTEM_LEAKING_STATUS_ENDPOINT_PATH));
+        public bool? SystemLeakingStatus() => NefitEasyUtils.IsOnOrTrue(HttpGet<string>(EndpointPaths.PM_SYSTEM_LEAKING_STATUS_ENDPOINT_PATH));
 
-        public async Task<bool?> ThermalDesinfectEnabledAsync() => await Task.Run(() => GetThermalDesinfectEnabled());
+        public async Task<bool?> ThermalDesinfectEnabledAsync() => await Task.Run(() => ThermalDesinfectEnabled());
 
-        bool? GetThermalDesinfectEnabled() => NefitEasyUtils.IsOnOrTrue(HttpGet<string>(EndpointPaths.DHWA_THERMAL_DESINFECT_STATE_ENDPOINT_PATH));
+        public bool? ThermalDesinfectEnabled() => NefitEasyUtils.IsOnOrTrue(HttpGet<string>(EndpointPaths.DHWA_THERMAL_DESINFECT_STATE_ENDPOINT_PATH));
 
-        public async Task<DateTime> NextThermalDesinfectAsync() => await Task.Run(() => GetNextThermalDesinfect());
+        public async Task<DateTime> GetNextThermalDesinfectAsync() => await Task.Run(() => GetNextThermalDesinfect());
 
-        DateTime GetNextThermalDesinfect()
+        public DateTime GetNextThermalDesinfect()
         {
             var nextTermalTime = HttpGet<int>(EndpointPaths.DHWA_THERMAL_DESINFECT_TIME_ENDPOINT_PATH);
             var nextTermalDay = HttpGet<string>(EndpointPaths.DHWA_THERMAL_DESINFECT_WEEKDAY_ENDPOINT_PATH);
             return nextTermalDay != null ? NefitEasyUtils.GetNextDate(nextTermalDay, nextTermalTime) : new DateTime();
         }
 
-        public async Task<double> SystemPressureAsync() => await Task.Run(() => GetSystemPressure());
+        public async Task<double> GetSystemPressureAsync() => await Task.Run(() => GetSystemPressure());
 
-        double GetSystemPressure() => HttpGet<double>(EndpointPaths.APPLIANCE_SYSTEM_PRESSURE_ENDPOINT_PATH);
+        public double GetSystemPressure() => HttpGet<double>(EndpointPaths.APPLIANCE_SYSTEM_PRESSURE_ENDPOINT_PATH);
 
-        public async Task<double> CentralHeatingSupplyTemperatureAsync() => await Task.Run(() => GetCentralHeatingSupplyTemperature());
+        public async Task<double> GetCentralHeatingSupplyTemperatureAsync() => await Task.Run(() => GetCentralHeatingSupplyTemperature());
 
-        double GetCentralHeatingSupplyTemperature() => HttpGet<double>(EndpointPaths.HC1_ACTUAL_SUPPLY_TEMPERATURE_ENDPOINT_PATH);
+        public double GetCentralHeatingSupplyTemperature() => HttpGet<double>(EndpointPaths.HC1_ACTUAL_SUPPLY_TEMPERATURE_ENDPOINT_PATH);
 
-        public async Task<StatusCode> StatusCodeAsync() => await Task.Run(() => GetStatusCode());
+        public async Task<StatusCode> GetStatusCodeAsync() => await Task.Run(() => GetStatusCode());
 
-        StatusCode GetStatusCode() => new StatusCode(HttpGet<string>(EndpointPaths.APPLIANCE_DISPLAY_CODE_ENDPOINT_PATH), Convert.ToInt32(HttpGet<string>(EndpointPaths.APPLIANCE_CAUSE_CODE_ENDPOINT_PATH)));
+        public StatusCode GetStatusCode() => new StatusCode(HttpGet<string>(EndpointPaths.APPLIANCE_DISPLAY_CODE_ENDPOINT_PATH), Convert.ToInt32(HttpGet<string>(EndpointPaths.APPLIANCE_CAUSE_CODE_ENDPOINT_PATH)));
 
-        public async Task<ProgramSwitch> CurrentSwitchPointAsync() => await Task.Run(() => GetCurrentSwitchPoint());
+        public async Task<ProgramSwitch> GetCurrentSwitchPointAsync() => await Task.Run(() => GetCurrentSwitchPoint());
 
-        ProgramSwitch GetCurrentSwitchPoint()
+        public ProgramSwitch GetCurrentSwitchPoint()
         {
             var sp = HttpGet<IEnumerable<NefitSwitch>>(EndpointPaths.DHWA_CURRENT_SWITCHPOINT_ENDPOINT_PATH);
             return sp.Any() ? new ProgramSwitch(sp.ElementAt(0)) : null;
         }
 
-        public async Task<ProgramSwitch> NextSwitchPointAsync() => await Task.Run(() => GetNextSwitchPoint());
+        public async Task<ProgramSwitch> GetNextSwitchPointAsync() => await Task.Run(() => GetNextSwitchPoint());
 
-        ProgramSwitch GetNextSwitchPoint()
+        public ProgramSwitch GetNextSwitchPoint()
         {
             var sp = HttpGet<IEnumerable<NefitSwitch>>(EndpointPaths.DHWA_NEXT_SWITCHPOINT_ENDPOINT_PATH);
             return sp.Any() ? new ProgramSwitch(sp.ElementAt(0)) : null;
         }
 
-        public async Task<Location> LocationAsync() => await Task.Run(() => GetLocation());
+        public async Task<Location> GetLocationAsync() => await Task.Run(() => GetLocation());
 
-        Location GetLocation() => new Location(HttpGet<double>(EndpointPaths.LOCATION_LATITUDE_ENDPOINT_PATH), HttpGet<double>(EndpointPaths.LOCATION_LONGITUDE_ENDPOINT_PATH));
+        public Location GetLocation() => new Location(HttpGet<double>(EndpointPaths.LOCATION_LATITUDE_ENDPOINT_PATH), HttpGet<double>(EndpointPaths.LOCATION_LONGITUDE_ENDPOINT_PATH));
 
-        public async Task<IEnumerable<GasSample>> GasUsageAsync() => await Task.Run(() => GetGasUsage());
+        public async Task<IEnumerable<GasSample>> GetGasUsageAsync() => await Task.Run(() => GetGasUsage());
 
-        IEnumerable<GasSample> GetGasUsage()
+        public IEnumerable<GasSample> GetGasUsage()
         {
             var hasValidSamples = true;
             var currentPage = 1;
@@ -467,81 +467,81 @@ namespace NefitEasyDotNet
             return gasSamples;
         }
 
-        public async Task<UiStatus> UiStatusAsync() => await Task.Run(() => GetUiStatus());
+        public async Task<UiStatus> GetUiStatusAsync() => await Task.Run(() => GetUiStatus());
 
-        UiStatus GetUiStatus()
+        public UiStatus GetUiStatus()
         {
             var status = HttpGet<NefitStatus>(EndpointPaths.UISTATUS_ENDPOINT_PATH);
             return status != null ? new UiStatus(status) : default(UiStatus);
         }
 
-        public async Task<IEnumerable<string>> OwnerInfoAsync() => await Task.Run(() => GetOwnerInfo());
+        public async Task<IEnumerable<string>> GetOwnerInfoAsync() => await Task.Run(() => GetOwnerInfo());
 
-        IEnumerable<string> GetOwnerInfo() => HttpGet<string>(EndpointPaths.PERSONAL_DETAILS_ENDPOINT_PATH)?.Split(';');
+        public IEnumerable<string> GetOwnerInfo() => HttpGet<string>(EndpointPaths.PERSONAL_DETAILS_ENDPOINT_PATH)?.Split(';');
 
-        public async Task<IEnumerable<string>> InstallerInfoAsync() => await Task.Run(() => GetInstallerInfo());
+        public async Task<IEnumerable<string>> GetInstallerInfoAsync() => await Task.Run(() => GetInstallerInfo());
 
-        IEnumerable<string> GetInstallerInfo() => HttpGet<string>(EndpointPaths.INSTALLER_DETAILS_ENDPOINT_PATH)?.Split(';');
+        public IEnumerable<string> GetInstallerInfo() => HttpGet<string>(EndpointPaths.INSTALLER_DETAILS_ENDPOINT_PATH)?.Split(';');
 
-        public async Task<string> EasySerialAsync() => await Task.Run(() => GetEasySerial());
+        public async Task<string> GetEasySerialAsync() => await Task.Run(() => GetEasySerial());
 
-        string GetEasySerial() => HttpGet<string>(EndpointPaths.SERIAL_NUMBER_ENDPOINT_PATH);
+        public string GetEasySerial() => HttpGet<string>(EndpointPaths.SERIAL_NUMBER_ENDPOINT_PATH);
 
-        public async Task<string> EasyFirmwareAsync() => await Task.Run(() => GetEasyFirmware());
+        public async Task<string> GetEasyFirmwareAsync() => await Task.Run(() => GetEasyFirmware());
 
-        string GetEasyFirmware() => HttpGet<string>(EndpointPaths.VERSION_FIRMWARE_ENDPOINT_PATH);
+        public string GetEasyFirmware() => HttpGet<string>(EndpointPaths.VERSION_FIRMWARE_ENDPOINT_PATH);
 
-        public async Task<string> EasyHardwareAsync() => await Task.Run(() => GetEasyHardware());
+        public async Task<string> GetEasyHardwareAsync() => await Task.Run(() => GetEasyHardware());
 
-        string GetEasyHardware() => HttpGet<string>(EndpointPaths.VERSION_HARDWARE_ENDPOINT_PATH);
+        public string GetEasyHardware() => HttpGet<string>(EndpointPaths.VERSION_HARDWARE_ENDPOINT_PATH);
 
-        public async Task<string> EasyUuidAsync() => await Task.Run(() => GetEasyUuid());
+        public async Task<string> GetEasyUuidAsync() => await Task.Run(() => GetEasyUuid());
 
-        string GetEasyUuid() => HttpGet<string>(EndpointPaths.UUID_ENDPOINT_PATH);
+        public string GetEasyUuid() => HttpGet<string>(EndpointPaths.UUID_ENDPOINT_PATH);
 
-        public async Task<EasyUpdateStrategy> EasyUpdateStrategyAsync() => await Task.Run(() => GetEasyUpdateStrategy());
+        public async Task<EasyUpdateStrategy> GetEasyUpdateStrategyAsync() => await Task.Run(() => GetEasyUpdateStrategy());
 
-        EasyUpdateStrategy GetEasyUpdateStrategy() => HttpGet<EasyUpdateStrategy>(EndpointPaths.UPDATE_STRATEGY_ENDPOINT_PATH);
+        public EasyUpdateStrategy GetEasyUpdateStrategy() => HttpGet<EasyUpdateStrategy>(EndpointPaths.UPDATE_STRATEGY_ENDPOINT_PATH);
 
-        public async Task<string> CentralHeatingSerialAsync() => await Task.Run(() => GetCentralHeatingSerial());
+        public async Task<string> GetCentralHeatingSerialAsync() => await Task.Run(() => GetCentralHeatingSerial());
 
-        string GetCentralHeatingSerial() => HttpGet<string>(EndpointPaths.APPLIANCE_SERIAL_NUMBER_ENDPOINT_PATH);
+        public string GetCentralHeatingSerial() => HttpGet<string>(EndpointPaths.APPLIANCE_SERIAL_NUMBER_ENDPOINT_PATH);
 
-        public async Task<string> CentralHeatingVersionAsync() => await Task.Run(() => GetCentralHeatingVersion());
+        public async Task<string> GetCentralHeatingVersionAsync() => await Task.Run(() => GetCentralHeatingVersion());
 
-        string GetCentralHeatingVersion() => HttpGet<string>(EndpointPaths.APPLIANCE_VERSION_ENDPOINT_PATH);
+        public string GetCentralHeatingVersion() => HttpGet<string>(EndpointPaths.APPLIANCE_VERSION_ENDPOINT_PATH);
 
-        public async Task<string> CentralHeatingBurnerMakeAsync() => await Task.Run(() => GetCentralHeatingBurnerMake());
+        public async Task<string> GetCentralHeatingBurnerMakeAsync() => await Task.Run(() => GetCentralHeatingBurnerMake());
 
-        string GetCentralHeatingBurnerMake() => HttpGet<string>(EndpointPaths.EMS_BRANDBIT_ENDPOINT_PATH);
+        public string GetCentralHeatingBurnerMake() => HttpGet<string>(EndpointPaths.EMS_BRANDBIT_ENDPOINT_PATH);
 
-        public async Task<EasySensitivity> EasySensitivityAsync() => await Task.Run(() => GetEasySensitivity());
+        public async Task<EasySensitivity> GetEasySensitivityAsync() => await Task.Run(() => GetEasySensitivity());
 
-        EasySensitivity GetEasySensitivity() => HttpGet<EasySensitivity>(EndpointPaths.PIR_SENSITIVITY_ENDPOINT_PATH);
+        public EasySensitivity GetEasySensitivity() => HttpGet<EasySensitivity>(EndpointPaths.PIR_SENSITIVITY_ENDPOINT_PATH);
 
-        public async Task<double> EasyTemperatureStepAsync() => await Task.Run(() => GetEasyTemperatureStep());
+        public async Task<double> GetEasyTemperatureStepAsync() => await Task.Run(() => GetEasyTemperatureStep());
 
-        double GetEasyTemperatureStep() => HttpGet<double>(EndpointPaths.TEMPERATURE_STEP_ENDPOINT_PATH);
+        public double GetEasyTemperatureStep() => HttpGet<double>(EndpointPaths.TEMPERATURE_STEP_ENDPOINT_PATH);
 
-        public async Task<double> EasyTemperatureOffsetAsync() => await Task.Run(() => GetEasyTemperatureOffset());
+        public async Task<double> GetEasyTemperatureOffsetAsync() => await Task.Run(() => GetEasyTemperatureOffset());
 
-        double GetEasyTemperatureOffset() => HttpGet<double>(EndpointPaths.HC1_TEMPERATURE_ADJUSTMENT_ENDPOINT_PATH);
+        public double GetEasyTemperatureOffset() => HttpGet<double>(EndpointPaths.HC1_TEMPERATURE_ADJUSTMENT_ENDPOINT_PATH);
 
         public async Task<bool> SetHotWaterModeClockProgramAsync(bool onOff) => await Task.Run(() => SetHotWaterModeClockProgram(onOff));
 
-        bool SetHotWaterModeClockProgram(bool onOff) => HttpPut(EndpointPaths.DHWA_OPERATION_CLOCK_MODE_ENDPOINT_PATH, NefitEasyUtils.GetHttpPutDataString(onOff ? nameof(Switch.On) : nameof(Switch.Off)));
+        public bool SetHotWaterModeClockProgram(bool onOff) => HttpPut(EndpointPaths.DHWA_OPERATION_CLOCK_MODE_ENDPOINT_PATH, NefitEasyUtils.GetHttpPutDataString(onOff ? nameof(Switch.On) : nameof(Switch.Off)));
 
         public async Task<bool> SetHotWaterModeManualProgramAsync(bool onOff) => await Task.Run(() => SetHotWaterModeManualProgram(onOff));
 
-        bool SetHotWaterModeManualProgram(bool onOff) => HttpPut(EndpointPaths.DHWA_OPERATION_MANUAL_MODE_ENDPOINT_PATH, NefitEasyUtils.GetHttpPutDataString(onOff ? nameof(Switch.On) : nameof(Switch.Off)));
+        public bool SetHotWaterModeManualProgram(bool onOff) => HttpPut(EndpointPaths.DHWA_OPERATION_MANUAL_MODE_ENDPOINT_PATH, NefitEasyUtils.GetHttpPutDataString(onOff ? nameof(Switch.On) : nameof(Switch.Off)));
 
         public async Task<bool> SetUserModeAsync(UserModes newMode) => await Task.Run(() => SetUserMode(newMode));
 
-        bool SetUserMode(UserModes newMode) => newMode != UserModes.Unknown && HttpPut(EndpointPaths.HC1_USERMODE_ENDPOINT_PATH, NefitEasyUtils.GetHttpPutDataString(newMode.ToString()));
+        public bool SetUserMode(UserModes newMode) => newMode != UserModes.Unknown && HttpPut(EndpointPaths.HC1_USERMODE_ENDPOINT_PATH, NefitEasyUtils.GetHttpPutDataString(newMode.ToString()));
 
         public async Task<bool> SetTemperatureAsync(double temperature) => await Task.Run(() => SetTemperature(temperature));
 
-        bool SetTemperature(double temperature)
+        public bool SetTemperature(double temperature)
         {
             if (!(temperature >= 5) || !(temperature <= 30)) return false;
 
