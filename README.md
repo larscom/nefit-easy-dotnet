@@ -26,7 +26,7 @@ await client.ConnectAsync();
     
 if (client.ConnectionStatus == NefitConnectionStatus.Connected)
 {
-    IEnumerable<string> owner = await client.OwnerInfoAsync();
+    IEnumerable<string> owner = await client.GetOwnerInfoAsync();
 }    
 ```
 
@@ -76,7 +76,7 @@ await client.ConnectAsync();
     
 if (client.ConnectionStatus == NefitConnectionStatus.Connected)
 {
-     UiStatus status = await client.UiStatusAsync();
+     UiStatus status = await client.GetUiStatusAsync();
      double temperature = status.InHouseTemperature;
 }
 ```
